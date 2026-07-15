@@ -2,6 +2,7 @@
 
 ## AI Usage
 <!-- Fill in at the end — how you used AI tools during this project -->
+AI was not used in this project and I instead relied on YouTube videos or the slides provided by the class to learn more about Git, specifically git rebase.
 
 ## Comment 1 — Rename
 **What I did:**
@@ -51,8 +52,23 @@ I agree with the mantainers observation that "Most users want to see what they a
 
 ## Comment 6 — Rebase
 **What conflicted:**
+Nothing conflicted while I rebased, in all honestly, when I rebased it erased a portion of WatchListEntry within the models.py and I panicked since I thought it was unintentional. Afterwards, I investigated the main github branch and I saw that model.py was changed to reflect it. I also investigated the git log to see that the rebase worked as expected and it did.
 **How I resolved it:**
+Git automatically erased the WatchListEntry portion of the code in models.py
 **How I verified no conflict remains:**
+I verified that no conflicts remained by trying to produce another commit by altering another file, if there were any conflicts present it would've been represented as I tried to commit to the branch.
 
 ## PR Description
 <!-- Written at the end — feature overview, design decisions, manual testing steps -->
+
+Watchlist Feature OverView:
+
+The watchlist features functions in the same manner as it does in platforms like LetterBoxd or IMDb, where a user can first query for all the eligible films in the database by calling get_films to get a list of all the registered films from the database. The user can then add any of these films to a watchlist registered specifically for them by calling the add_to_watchlist() function or visiting the "/<user_id>/add" POST endpoint and providing the specific films id. This film is then entered into their watchlist, where they can later examine these changes or their many entries by calling on the get_watchlist function or visiting the "/<user_id>" GET endpoint to receive the long list of film entries entered in their watchlist.
+
+Design Decisions:
+
+I made two import design decisions for the implementation of the project. The first decision is advocating for WatchlistEntries to have their public variable set to false by default since the current project archetecture reafirms the private nature of creating a watchlist and that it's industry precedent established by media platforms like YouTube or IMDb to set watchlists private by default so the user expects this behavior. I also advocated for the output of get_watchlist to be ordered by the added_date since it is more aligned with the intended use case of providing a list of user picked media options that users utilize at a later date to base their media choices on, the more recent additions are more aligned with the users current tastes and have a higher likelyhood of being chosen since the user is more likely to remember it.
+
+Testing Instructions:
+
+First and foremost, there are some very thorough tests provided in the test folder which can all be run by putting "pytest tests/ -v" into your powershell. In addition to this, any tests can be created within the test_watchlist.py file by utilizing the established app instance to write any desired test. Related to testing, a new python file can be created where it imports the create_app(), calls the function and saves the return value to a variable named app. To then use "with app.app_context():" statement to query into the database and call the functions without engaging with the endpoints. Personally, within the app context I added a couple films to the database and custom made user to the database by creating the corresponding object and adding it by calling db.session.add(object); db.session.commit(). With these object, I was able to call the fuctions within watchlist_service.py by providing the id value corresponding to the created objects to add_to_watchlist() and then calling get_watchlist() to see if the change was reflected. In addition to this method, the apps server endpoints can be called by providing using the curl function. First you must run the app by using the command "python app.py" to run the server. Then, using gitbash you can run curl command that follow this format of "curl -X (POST | GET| DELETE) local_url_of_the_app.py_server/ (desired endpoint | watchlist)/(User_ID)/(add | nothing) -H "Content-Type: application/json" \-d '{"film_id": (film_id)}' " to complete command. Using curl -X POST (url)/watchlist/(user_id)/add -H "Content-Type: application/json" -d '{"film_id": (film_id)}' to add a specific movie to the watchlist and then using curl -X GET (url)/watchlist/(user_id) to receive the users' watchlist to verify the changes taken place.
