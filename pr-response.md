@@ -39,8 +39,15 @@ The biggest tradeoff is that setting entries to public by default would allow fo
 
 ## Comment 5 — Sort order
 **My position:**
+I agree that the watchlist should be ordered by date added by default rather than ordering it alphabetically.
+
 **Reasoning:**
+The primary and expected purpose of a watchlist is to act as a queue of media that a user intends to watch at a later date rather than a catalogue tracking their movie tastes.
+The interaction of tracking a users' movie tastes or potential tastes is already provided by the collections workflow, a dedicated tool provided by this application where a user can rate past media and reflect on their tastes. When a user returns to a watchlist, they are often deciding what to watch next rather than finding a specific title in their list. Alphabetical ordering is still useful when a user wants to find a specific film in their large list, but I belive this a secondary use case compared to the expected value of a watchlist as helping users decide what to watch next. This decision optimizes the watchlist for assiting users with decision making rather than retrieving entries in their list.
+
 **Engagement with reviewer's point:**
+
+I agree with the mantainers observation that "Most users want to see what they added recently" since it supports the idea that a watchlist is meant to functions as a tool to aid decision making. Displaying the newest entries to the watchlist first makes it more likely that the user still recognizes the media and can base their decision much easier in comparison. If an older entry were shown at the top, it would be more likely that a user would forget about this entry and would instead have to research the entry, making the barrier for entry much higher. This behavior is present in established platform implementations of the watchlist, like Letterboxd which by default orders entries by date in descending order instead.
 
 ## Comment 6 — Rebase
 **What conflicted:**
